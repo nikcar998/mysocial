@@ -1,0 +1,18 @@
+.rounded-lg{
+    border-radius:1.25rem;
+}
+.avatarImage{
+    width:170px;
+    height:170px;
+    left:50%; 
+    transform: translate(-50%, 86%); 
+    border:1px solid grey;
+    padding:1px;
+    background-color:white;
+}
+.greyBox{
+    left:33%;
+     top:30%;
+     height:35%;
+     z-index: -1;
+}
