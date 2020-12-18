@@ -29,6 +29,7 @@ function postDelete(){
     {/************************************************************ */}
 }
 
+
 function likeHandler(bool){
     const url = "/like/"+props.post.id
     axios.post(url,{

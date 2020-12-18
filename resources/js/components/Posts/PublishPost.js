@@ -3,7 +3,16 @@ import ReactDOM from 'react-dom';
 import axios from 'axios'
 function PublishPost(props) {
     const [inputValue,setInputValue]=useState('')
+    Pusher.logToConsole = true;
 
+    var pusher = new Pusher('e5221c7a4e5fdc179556', {
+      cluster: 'eu'
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+      alert(JSON.stringify(data));
+    });
     const user=props.user;
     const avatarUrl=user.avatar!==null?
     "/storage/"+user.avatar
