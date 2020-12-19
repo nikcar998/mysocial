@@ -17,7 +17,9 @@ class Post extends Model
         'body',
         'user_username',
         'user_email',
-        'user_avatar'    
+        'user_avatar',
+        'id',
+        'post_id'   
     ];
    
 

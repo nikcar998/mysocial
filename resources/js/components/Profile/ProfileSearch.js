@@ -1,12 +1,10 @@
-import React,{useEffect, useState} from 'react';
-import ReactDOM from 'react-dom';
+import React,{ useState} from 'react';
 import axios from 'axios'
+import FormProfileSearch from './FormProfileSearch';
 
-function Posts(props) {
+function ProfileSearch(props) {
 
-    const [users,setUsers]=useState(props.users);
-    const [query,setQuery]=useState('')
-    
+    const [users,setUsers]=useState(props.users); 
 
   /******************** funzione da esportare  ***********/
   function escapeHtml(text) {
@@ -16,39 +14,12 @@ function Posts(props) {
         .replace(/&#039;/g, "'")
   }
 
-  /*********************************************************** */
-
-
-    function liveSearchHandler(e){
-        e.preventDefault()
-        setQuery(e.target.value)
-        if(e.target.value.length>=3){
-            console.log(JSON.stringify(query))
-
-            axios.post("/search",{
-                query:query
-            })
-            .then(resp=>{
-                console.log(resp.data[0])
-                setUsers(resp.data[0])
-            })
-        }else{
-            console.log(e.target.value)
-            if(e.target.value===""){
-                setUsers(props.users)
-            }
-        }
-    }
-
 
     return (
 
 
     <div className="mx-auto col-5 d-flex flex-column p-2 flex-coloum rounded-lg">
-        <form className="bg-light form-group d-flex justify-content-center align-items-center py-3 px-2 mt-1 rounded-lg">
-            <input onChange={liveSearchHandler} type="text" className="form-control w-75 " placeholder="Look for someone!"></input>
-            <button className="btn btn-primary " type="submit">Search!</button>
-        </form>
+        <FormProfileSearch users={props.users} setUsers={setUsers} />
         <div className="p-0 mt-2 bg-light border rounded-lg">
         {users.map(user=>{
             const profileLink="/profile/"+user.username
@@ -101,4 +72,4 @@ function Posts(props) {
     );
     }
 
-    export default Posts;
+    export default ProfileSearch;

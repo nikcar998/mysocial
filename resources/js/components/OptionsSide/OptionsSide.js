@@ -1,6 +1,5 @@
 import React,{useEffect, useState} from 'react';
-import ReactDOM from 'react-dom';
-import axios from 'axios'
+
 function OptionsSide(props){
     const userUrl="/profile/"+props.user.username;
      return (

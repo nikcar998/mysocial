@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+
 function Follows(props) {
     const follows=props.follows;
     return (    

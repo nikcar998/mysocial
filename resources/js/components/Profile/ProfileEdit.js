@@ -1,7 +1,6 @@
-import React,{useEffect, useState} from 'react';
-import ReactDOM from 'react-dom';
+import React,{ useState} from 'react';
 import axios from 'axios'
-function OptionsSide(props){
+function ProfileEdit(props){
 
    const [name,setName]=useState(props.user.name)
    const [username,setUsername]=useState(props.user.username)
@@ -265,4 +264,4 @@ function OptionsSide(props){
      )
 }
 
-export default OptionsSide;
+export default ProfileEdit;

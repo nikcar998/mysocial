@@ -50,6 +50,8 @@ class ProfilesController extends Controller
             'user'=>auth()->user(),
         ]);
     }
+
+    
     public function searchShow()
     {
        // dd(User::paginate(30));

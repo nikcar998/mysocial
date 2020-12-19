@@ -1,8 +1,6 @@
-import React,{useState,useEffect, useContext} from 'react';
-import './styles.css';
-import Pusher from 'pusher-js'
-import Axios from 'axios';
-import ResultContext from '../ResultContext';
+import React,{useState} from 'react';
+
+
 
 
 function FollowList(props) {
@@ -14,19 +12,17 @@ function FollowList(props) {
     const user=props.user;
     const channel=props.channel;
 
-    console.log([follows,otherUserId]);
-    const [followContainer,setFollowContainer]=useState({overflowX:"scroll"})
+    console.log(follows);
+    const [followContainer]=useState({overflowX:"scroll"})
   
     /******************* Handlers ******************** */
     function otherUserHandler(newId){
-  
         channel.unbind('my-event-'+otherUserId+user)
  
 
         messageFetch(newId)
         setOtherUserId(newId);
         setOtherUser(follows.filter(follower=> follower.id == newId))
-       // setFollowContainer({opacity:0})
  
 
     }

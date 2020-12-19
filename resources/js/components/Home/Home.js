@@ -1,8 +1,7 @@
-import React,{useEffect, useState} from 'react';
+import React,{useEffect} from 'react';
 import Posts from "../Posts/Posts"
 import PublishPost from "../Posts/PublishPost"
 function Home(props) {
-    let i=0;
     const posts=props.posts
     useEffect(() => {
         console.log(posts);
@@ -14,7 +13,7 @@ function Home(props) {
         <div className="border rounded-lg  bg-light text-dark mt-4">
             {posts.map(function(post, index){
                 const key=post.id;
-                return(<Posts key={key} post={post} />)
+                return(<Posts key={key} post={post} authUserUsername={props.user.username}/>)
             })}
         </div>
         }

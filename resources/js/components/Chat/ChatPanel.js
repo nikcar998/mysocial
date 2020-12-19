@@ -1,15 +1,13 @@
-import React,{useState,useEffect, useContext} from 'react';
-import './styles.css';
+import React,{useState,useEffect} from 'react';
 import Pusher from 'pusher-js'
 import Axios from 'axios';
-import ResultContext from '../ResultContext';
 import FollowList from './FollowList';
 import Message from './Message';
+import FormProfileSearch from '../Profile/FormProfileSearch'
 
 function Chatpanel(props) {
-
     const user=props.user;
-    const follows=props.follows;
+    const [follows,setFollows]=useState(props.follows);
     const [otherUserId, setOtherUserId ] =useState("")
     const [otherUser,setOtherUser]=useState({});
     const [messages,setMessages]=useState([]);
@@ -101,10 +99,10 @@ function Chatpanel(props) {
       }
     }, [otherUser])
 
-
         return (
-          /*****************************follows List ******/
-            <div className="mx-auto col-5 d-flex flex-column">     
+            <div className="mx-auto col-5 d-flex flex-column">   
+              <FormProfileSearch users={props.follows} setUsers={setFollows} />
+              {/*****************************follows List **************/}
               <FollowList follows={follows}
                           messageFetch={messageFetch}   
                           setOtherUser={setOtherUser} 

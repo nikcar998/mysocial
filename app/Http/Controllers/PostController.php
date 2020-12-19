@@ -15,11 +15,14 @@ class PostController extends Controller
         $this->middleware('auth');
     }
 
+
     public function index()
     {
         $posts=Post::all();
         return $posts;
     }
+
+
     public function store()
     {
         $attributes = request()
@@ -35,8 +38,17 @@ class PostController extends Controller
             'user_username'=>$user->username,
             'user_email'=>$user->email,
             'body'=>$attributes['body']
-        ]); 
-       
-        
+        ]);  
+    }
+
+
+    public function delete(Post $post)
+    {
+        $user=User::where('username',request('user'))->get();
+        $this->authorize('edit',$user[0]);
+        $id = $post->id;
+        return Post::where('id', $id)->delete();
+
+        // Post::where('id', $id)->delete();
     }
 }

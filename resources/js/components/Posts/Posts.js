@@ -1,21 +1,21 @@
-import React,{useEffect, useState} from 'react';
-import ReactDOM from 'react-dom';
+import React,{ useState} from 'react';
 import axios from 'axios'
 
 function Posts(props) {
-const [likes,setLikes]=useState(props.post.likes?props.post.likes:"0")
-const [dislikes,setDislikes]=useState(props.post.dislikes?props.post.dislikes:"0")
-const [dislikesColor,setDislikesColor]=useState({})
-const postsCreatorUsername=eval(JSON.stringify(props.post.user_username));
+const [post]=useState(props.post);
+const [likes,setLikes]=useState(post.likes?post.likes:"0")
+const [dislikes,setDislikes]=useState(post.dislikes?post.dislikes:"0")
+const postCreatorUsername=eval(JSON.stringify(post.user_username));
+const id= post.id;
+const authUserUsername=props.authUserUsername;
+console.log(authUserUsername)
 
-const postsCreatorEmail=props.post.user_email;
-
-const profileLink="/profile/"+postsCreatorUsername
-const avatarUrl=props.post.user_avatar!==null?
-"/storage/"+props.post.user_avatar
+const profileLink="/profile/"+postCreatorUsername
+const avatarUrl=post.user_avatar!==null?
+"/storage/"+post.user_avatar
 :
 "/images/default_avatar.png";
-console.log(avatarUrl)
+
 
 /******************** funzione da esportare  ***********/
 function escapeHtml(text) {
@@ -24,14 +24,22 @@ function escapeHtml(text) {
         .replace('+','')
         .replace(/&#039;/g, "'")
 }
-
+        {/*****************************DELETE **************** */}
 function postDelete(){
-    {/************************************************************ */}
+    const URL="/posts/delete/"+id;
+    axios.delete(URL,{
+       data:{ user:postCreatorUsername}
+    })
+    .then(resp=>{
+        console.log(resp)
+        //window.location.reload(false);
+    })
+    .catch(e=>{console.log(e)})
 }
 
-
+{/**************************** LIKE-HANDLER **************** */}
 function likeHandler(bool){
-    const url = "/like/"+props.post.id
+    const url = "/like/"+post.id
     axios.post(url,{
         value:bool
     }).then(resp=>{
@@ -43,7 +51,7 @@ function likeHandler(bool){
     }).catch(e=>console.log(e))
 }
 
-console.log(props.post)
+console.log(post)
 return (
 
 
@@ -59,22 +67,29 @@ return (
                 />
             </a>
         </div>
-
-        <div>
-            <h5 className="font-weight-bold mb-2 text-primary">{postsCreatorUsername}</h5>
-            <a href={profileLink}>
-                <p className="text-decoration-none text-secondary">
-                    {escapeHtml(decodeURIComponent(props.post.body))}
-                </p>
-            </a>
+        <div className="w-100">
+            <div className="d-flex justify-content-between align-items-start w-100">
+                <h5 className="font-weight-bold mb-2 text-primary">{postCreatorUsername}</h5>
+                {/********************** DELETE IMAGE ***************** */}
+                {postCreatorUsername=== authUserUsername &&
+                <img
+                onClick={postDelete}
+                className="border border-1 rounded-lg border-secondary p-1 mb-2"
+                src="/images/trash.svg"
+                width="25"
+                />
+                }
+            </div>
+            <div>
+                <a href={profileLink}>
+                    <p className="text-decoration-none text-secondary">
+                        {escapeHtml(decodeURIComponent(post.body))}
+                    </p>
+                </a>
+            </div>
         </div>
-        <img
-            onClick={postDelete}
-            className=" ml-3 mr-1 align-self-end justify-self-end"
-            src="/images/trash.svg"
-            width="15"
-            />
     </div>
+
     {/************************* LIKES ********************* */}
     <div className="d-flex justify-content-start align-middle m-1">
         <img

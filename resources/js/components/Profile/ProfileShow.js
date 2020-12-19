@@ -1,5 +1,4 @@
 import React,{useEffect, useState} from 'react';
-import ReactDOM from 'react-dom';
 import axios from 'axios'
 import Posts from '../Posts/Posts'
 function ProfileShow(props) {
@@ -35,6 +34,8 @@ const avatarUrl=user_profile.avatar?
 const joined=user_profile.created_at.slice(0, 10)
 const followToggleUrl="/profile/"+user_profile.username+"/follow";
 const editUrl="/profile/"+user_profile.username+"/edit"
+
+
 
 function followToggle(){
     axios.post(followToggleUrl)

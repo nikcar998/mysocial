@@ -15,8 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    if(auth()->user()){
+        return redirect('home');
+    }else{
+        return view('welcome');
+    }
+})->name('welcome');
 
 Auth::routes();
 
@@ -43,5 +47,6 @@ Route::post('/profile/{user:username}/follow', 'App\Http\Controllers\FollowsCont
 
 //Route::get('/posts', [App\Http\Controllers\PostController::class, 'index']);
 Route::post('/posts', 'App\Http\Controllers\PostController@store');
+Route::delete('/posts/delete/{post:id}', 'App\Http\Controllers\PostController@delete');
 
 

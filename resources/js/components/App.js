@@ -1,10 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-  } from "react-router-dom";
 import Home from "./Home/Home"
 import OptionsSide from "./OptionsSide/OptionsSide"
 import Follows from "./Follows/Follows"

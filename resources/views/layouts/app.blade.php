@@ -21,11 +21,17 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="h-100 bg-dark text-white ">
+    @auth
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+            <div class="container-fluid">
+                <a class="navbar-brand " href="{{ url('/home') }}">
+                    <h1 class="ml-4" style="font-weight:800; font-size:20">
+                        <span class="text-primary" style="font-weight:900; font-size:25" >
+                            MY
+                        </span>
+                        Social
+                    </h1>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -75,7 +81,7 @@
                 </div>
             </div>
         </nav>
-
+@endauth
         <main class="py-4 ">
             @yield('content')
         </main>
