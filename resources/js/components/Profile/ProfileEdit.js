@@ -1,5 +1,9 @@
 import React,{ useState} from 'react';
 import axios from 'axios'
+import {Link} from "react-router-dom"
+
+//questo è uno tra i componenti più grandi in quanto presenta 3 form, con le relative funzioni per gestire i submit
+// e i cambiamenti nei vari input, che permettono di cambiare determinate parti del profilo dello user
 function ProfileEdit(props){
 
    const [name,setName]=useState(props.user.name)
@@ -18,7 +22,7 @@ function ProfileEdit(props){
     const avatarUrl="/profile/"+props.user.username+"/avatar";
     const coverUrl="/profile/"+props.user.username+"/cover";
     
-    const redirectUrl="/profile/"+username;
+    const redirectUrl="/"+username;
     
 
     function editProfile(e)
@@ -99,16 +103,15 @@ function ProfileEdit(props){
     }
 
     
-    //setInterval(()=>{console.log(avatar)},3000)
      return (
          <div className="bg-light mx-auto col-5 d-flex flex-column p-2 flex-coloum">
         <form onSubmit={editProfile}  className="p-0 m-0">
             <div className="p-2 d-flex flex-column bg-secondary rounded-lg w-50 position-absolute greyBox" style={boxAppear}>
                 <h2 className="font-weight-bold text-center mt-3">Updated!</h2>
                 <hr></hr>
-                <a href={redirectUrl} className="btn btn-primary  m-auto">
+                <Link to={redirectUrl} className="btn btn-primary  m-auto">
                     <h5 className="font-weight-bold text-center m-auto">Go have fun!</h5>
-                </a>
+                </Link>
             </div>
         <div class="mb-6">
             <label class="d-block mb-2 text-uppercase font-weight-bold text-secondary"
@@ -185,11 +188,11 @@ function ProfileEdit(props){
                 Submit
             </button>
 
-            <a href={userUrl} class="hover:underline">Cancel</a>
+            <Link to={"/"+username} class="hover:underline">Cancel</Link>
         </div>
     </form>
 
-    {/*altro form  **************************************************/}
+    {/*altro form per avatar  **************************************************/}
     <form className='bg-light p-1' onSubmit={avatarSubmit} >
         
         <div class="mb-6">
@@ -220,11 +223,11 @@ function ProfileEdit(props){
                 Submit
             </button>
 
-            <a href={userUrl} class="hover:underline">Cancel</a>
+            <Link to={"/"+username} class="hover:underline">Cancel</Link>
             </div>
         </div>
 </form>
- {/*altro form  **************************************************/}
+ {/*altro form  cover *************************************************************/}
  <form className='bg-light p-1' onSubmit={coverSubmit} >
         <div class="mb-6">
             <label class="d-block mb-2 text-uppercase font-weight-bold text-secondary"
@@ -256,7 +259,7 @@ function ProfileEdit(props){
                 Submit
             </button>
 
-            <a href={userUrl} class="hover:underline">Cancel</a>
+            <Link to={"/"+username} class="hover:underline">Cancel</Link>
             </div>
 
     </form>

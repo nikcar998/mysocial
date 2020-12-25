@@ -16,3 +16,10 @@
      height:35%;
      z-index: -1;
 }
+
+.logoMySocial{
+    font-weight:800;
+    font-size:100;
+    line-height:100%;
+    font-family: 'Fredoka One', cursive;
+}

@@ -26,40 +26,20 @@ class ProfilesController extends Controller
         }else{
             $posts=Post::where('user_username',$user->username)->latest()->get();
         }
-        return view('profile.show',[ 
+        return [ 
             'user_profile'=>$user,
-            'follows'=>User::find(auth()->user()->id)->follows,
-            'user'=>Auth::user(),
             'posts'=>$posts,
             'isUser'=>$isUser,
             'isFollowing'=>$isFollowing,
-            'avatar'=>auth()->user()->avatar,
-            'avatar_cover'=>auth()->user()->avatar_cover
-            ]
-                    );
+            ];
 
-    }
-
-
-    public function edit(User $user)
-    {
-        $this->authorize('edit',$user);
-
-        return view('profile.edit',[
-            'follows'=>User::find(auth()->user()->id)->follows,
-            'user'=>auth()->user(),
-        ]);
     }
 
     
     public function searchShow()
     {
-       // dd(User::paginate(30));
-        return view('profile.search',[
-            'follows'=>User::find(auth()->user()->id)->follows,
-            'user'=>auth()->user(),
-            'users'=>User::latest()->take(20)->get()
-        ]);
+        return  User::where('id','!=',auth()->user()->id)->latest()->take(10)->get();
+
         
     }
 
@@ -118,8 +98,5 @@ class ProfilesController extends Controller
         return $attributes;
 
     }
-    public function index()
-    {
-        return "Hello";
-    }
+
 }

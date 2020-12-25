@@ -31,6 +31,8 @@ function Chatpanel(props) {
 
 
 /*********************************Axios functions ***************/
+
+//funzione che gestisce l'invio di messaggi
     function messageSender(e){
       e.preventDefault()
         Axios.post("/chat",{
@@ -58,7 +60,7 @@ function Chatpanel(props) {
     
         }
 
-        
+  // funzione che effettua il fetch dei messaggi più recenti scambiati con l'utente desiderato   
     function messageFetch(newId){
         Axios.get("/chat/messages/"+newId)
             .then(data=>{
@@ -87,8 +89,8 @@ function Chatpanel(props) {
       console.log(messageText + "textHandler")
     }
 
+    //quando un utente viene selezionato il suo avatar viene salvato nello state sottostante
      useEffect(() => {
-       console.log([otherUser, "useEffect chatpanel"])
       if(otherUser[0]){
         setOtherUserAvatar(
           otherUser[0].avatar!==null?

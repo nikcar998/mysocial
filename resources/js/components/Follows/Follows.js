@@ -1,5 +1,6 @@
 import React from 'react';
 
+//il componente mostra semplicemente la lista degli utenti seguiti dallo user
 function Follows(props) {
     const follows=props.follows;
     return (    
@@ -7,7 +8,7 @@ function Follows(props) {
                 <h1 className="font-weight-bold mb-3">Follow</h1>
                     {follows.map(follower=>{
                         const key =follower.email;
-                        const followerUrl="/profile/"+follower.username
+                        const followerUrl="/"+follower.username
                         const followerAvatar=follower.avatar!==null?
                                 '/storage/'+follower.avatar 
                                 : 

@@ -1,11 +1,13 @@
 import React,{useEffect} from 'react';
 import Posts from "../Posts/Posts"
 import PublishPost from "../Posts/PublishPost"
+
+// questo è il primo componente mostrato dopo l'iscizione o l'accesso al sito
+// da la possibilità di vedere i posts propri e degli utenti seguiti e di crearne di nuovi
 function Home(props) {
     const posts=props.posts
-    useEffect(() => {
-        console.log(posts);
-    }, [])
+
+    
     return (
     <div className="mx-auto col-5 d-flex flex-column">
         <PublishPost user={props.user}/>

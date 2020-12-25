@@ -18,8 +18,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts=Post::all();
-        return $posts;
+        return auth()->user()->timeline();
     }
 
 
@@ -48,7 +47,5 @@ class PostController extends Controller
         $this->authorize('edit',$user[0]);
         $id = $post->id;
         return Post::where('id', $id)->delete();
-
-        // Post::where('id', $id)->delete();
     }
 }

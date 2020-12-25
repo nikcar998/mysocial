@@ -15,4 +15,8 @@ class FollowsController extends Controller
 
         return redirect("/profile"."/".$user->username);
     }
+    function index()
+    {
+        return User::find(auth()->user()->id)->follows;
+    }
 }

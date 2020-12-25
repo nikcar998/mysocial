@@ -1,5 +1,7 @@
 import React,{ useState} from 'react';
 import axios from 'axios'
+
+// questo componente da la possibilità di creare nuovi post
 function PublishPost(props) {
     const [inputValue,setInputValue]=useState('')
     const user=props.user;
@@ -7,6 +9,9 @@ function PublishPost(props) {
     "/storage/"+user.avatar
     :
     "/images/default_avatar.png";
+
+
+    /******************************* Submit Hndler *************** */
     function handleSubmit(e){
         axios.post('/posts',{
             body:encodeURIComponent(inputValue),

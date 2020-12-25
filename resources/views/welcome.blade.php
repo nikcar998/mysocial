@@ -3,9 +3,9 @@
 @section('content')
             <div class="d-flex justify-content-around col-12 " style="margin-top:8rem">
                 <div class="col-6">
-                    <h1 class="ml-4 mt-3" style="font-weight:800; font-size:100; line-height:100%">
+                    <h1 class="ml-4 mt-3 logoMySocial">
                         <span class="text-primary d-inline-block p-0 text-right m-0" style="font-weight:900; font-size:150" >
-                            MY
+                            My
                         </span>
                         Social
                     </h1>

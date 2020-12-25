@@ -14,9 +14,9 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -26,9 +26,9 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container-fluid">
                 <a class="navbar-brand " href="{{ url('/home') }}">
-                    <h1 class="ml-4" style="font-weight:800; font-size:20">
-                        <span class="text-primary" style="font-weight:900; font-size:25" >
-                            MY
+                    <h1 class="ml-4 logoMySocial" style="font-weight:800; font-size:20">
+                        <span class="text-primary " >
+                            My
                         </span>
                         Social
                     </h1>

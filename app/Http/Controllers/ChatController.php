@@ -15,13 +15,6 @@ class ChatController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index()
-    {
-        return view('chat.chat',[
-            'follows'=>User::find(auth()->user()->id)->follows,
-            'user'=>auth()->user(),
-        ]);
-    }
     public function store()
     {
 
@@ -70,17 +63,5 @@ class ChatController extends Controller
                 ->get();
     }
 
-    function messageFounder($user1, $user2){
-        return Message::where([
-            ['sender_id', $user1],
-            ['rec_id', $user2]
-        ])
-        ->orWhere(function($query) use($user1, $user2)  {
-            $query->where('rec_id', $user1)
-                  ->where('sender_id', $user2);
-        })
-                ->latest()
-                ->take(10)
-                ->get();
-    }
+  
 }

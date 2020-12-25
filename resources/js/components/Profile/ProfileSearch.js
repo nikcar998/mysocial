@@ -1,10 +1,22 @@
-import React,{ useState} from 'react';
+import React,{ useState, useEffect} from 'react';
 import axios from 'axios'
 import FormProfileSearch from './FormProfileSearch';
+import {Link} from "react-router-dom"
 
-function ProfileSearch(props) {
 
-    const [users,setUsers]=useState(props.users); 
+//questo componente serve a mostrare i vari utenti appena iscritti ed entualmente cercare tra tutti gli iscritti
+// dando così la possibilità di seguire chi si preferisce
+function ProfileSearch() {
+
+    const [users,setUsers]=useState([]); 
+
+    function fetchUsers(){
+        axios.get('/get/search/users')
+        .then(data=>{
+            console.log(data.data);
+            setUsers(data.data)
+        }).catch(e=>console.log(e))
+    }
 
   /******************** funzione da esportare  ***********/
   function escapeHtml(text) {
@@ -14,15 +26,18 @@ function ProfileSearch(props) {
         .replace(/&#039;/g, "'")
   }
 
+  useEffect(() => {
+      fetchUsers()
+  }, [])
 
     return (
 
 
     <div className="mx-auto col-5 d-flex flex-column p-2 flex-coloum rounded-lg">
-        <FormProfileSearch users={props.users} setUsers={setUsers} />
+        <FormProfileSearch users={users} setUsers={setUsers} />
         <div className="p-0 mt-2 bg-light border rounded-lg">
         {users.map(user=>{
-            const profileLink="/profile/"+user.username
+            const profileLink="/"+user.username
             const avatarUrl=user.avatar!==null?
             "/storage/"+user.avatar
             :
@@ -38,14 +53,14 @@ function ProfileSearch(props) {
                         style={{height:"80px"}}
                         >
                 <div className="mr-2 flex-shrink-0 my-auto">
-                    <a href={profileLink}>
+                    <Link to={profileLink}>
                         <img
                             src={avatarUrl}
                             alt="avatar"
                             className="rounded-circle mr-2 p-auto"
                             style={{width:"50px", height:"50px"}}
                         />
-                    </a>
+                    </Link>
                 </div>
 
                 <div className="d-flex  justify-content-start">

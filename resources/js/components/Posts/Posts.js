@@ -1,6 +1,9 @@
 import React,{ useState} from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import {Link} from "react-router-dom";
 
+//il componente è il modello di ogni post, da la possibilità di dare like e dislike,
+//cancellare i propri post e di accede alla pagina del profilo del creatore del post stesso
 function Posts(props) {
 const [post]=useState(props.post);
 const [likes,setLikes]=useState(post.likes?post.likes:"0")
@@ -10,7 +13,7 @@ const id= post.id;
 const authUserUsername=props.authUserUsername;
 console.log(authUserUsername)
 
-const profileLink="/profile/"+postCreatorUsername
+const profileLink="/"+postCreatorUsername
 const avatarUrl=post.user_avatar!==null?
 "/storage/"+post.user_avatar
 :
@@ -24,7 +27,7 @@ function escapeHtml(text) {
         .replace('+','')
         .replace(/&#039;/g, "'")
 }
-        {/*****************************DELETE **************** */}
+        /*****************************DELETE **************** */
 function postDelete(){
     const URL="/posts/delete/"+id;
     axios.delete(URL,{
@@ -32,7 +35,7 @@ function postDelete(){
     })
     .then(resp=>{
         console.log(resp)
-        //window.location.reload(false);
+        window.location.reload(false);
     })
     .catch(e=>{console.log(e)})
 }
@@ -58,14 +61,14 @@ return (
 <div className=" container d-flex flex-column bg-light p-2 border-bottom border-bottom-success">
     <div className="d-flex w-100">
         <div className="mr-2 d-flex justify-content-start align-items-start">
-            <a href={profileLink}>
+            <Link to={profileLink}>
                 <img
                     src={avatarUrl}
                     alt="avatar"
                     className="rounded-circle mr-2"
                     style={{width:"40px", height:"40px"}}
                 />
-            </a>
+            </Link>
         </div>
         <div className="w-100">
             <div className="d-flex justify-content-between align-items-start w-100">
@@ -81,11 +84,11 @@ return (
                 }
             </div>
             <div>
-                <a href={profileLink}>
+                <Link to={profileLink}>
                     <p className="text-decoration-none text-secondary">
                         {escapeHtml(decodeURIComponent(post.body))}
                     </p>
-                </a>
+                </Link>
             </div>
         </div>
     </div>

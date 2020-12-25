@@ -1,13 +1,13 @@
 import React,{ useState} from 'react';
 import axios from 'axios'
 
+
+//questo componente da la possibilità di cercare tra gli utenti iscritti per nome o username
+//necessita di due props una in cui passare gli utenti trovati e una da utilizzare quando l'input di ricerca è vuoto
 function FormProfileSearch(props) {
 
     const setUsers=props.setUsers;
     const [query,setQuery]=useState('')
-    
-
-  /*********************************************************** */
 
 
     function liveSearchHandler(e){
@@ -16,7 +16,7 @@ function FormProfileSearch(props) {
         if(e.target.value.length>=3){
             console.log(JSON.stringify(query))
 
-            axios.post("/search",{
+            axios.post("/post/search",{
                 query:query
             })
             .then(resp=>{

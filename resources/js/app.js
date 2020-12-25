@@ -14,9 +14,8 @@ require('../css/app.css');
  */
 
 require('./components/App');
-require('./components/Profile');
-require('./components/Edit');
-require('./components/Search');
-require('./components/Chat');
+
+
+
 
 

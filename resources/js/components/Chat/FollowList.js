@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 
 
 
-
+//il componente viene utilizzato per mostrare gli utenti con cui si vuole chattare (tra i propri follower o i vari iscritti)
 function FollowList(props) {
     const follows=props.follows;
     const messageFetch=props.messageFetch;
@@ -16,14 +16,14 @@ function FollowList(props) {
     const [followContainer]=useState({overflowX:"scroll"})
   
     /******************* Handlers ******************** */
+    //appena un utente viene selezionato avviene l'unbind con l'eventuale canale pusher precedentemente utilizzato
+    //per poi settare gli state secondo i necessari valori del nuovo user
     function otherUserHandler(newId){
         channel.unbind('my-event-'+otherUserId+user)
  
-
         messageFetch(newId)
         setOtherUserId(newId);
         setOtherUser(follows.filter(follower=> follower.id == newId))
- 
 
     }
 
@@ -34,7 +34,7 @@ function FollowList(props) {
                  
                     { follows.map(follower=>{
                         const key =follower.email;
-                        const followerUrl="/profile/"+follower.username
+                        const followerUrl="/"+follower.username
                         const followerAvatar=follower.avatar!==null?
                                 '/storage/'+follower.avatar 
                                 : 
